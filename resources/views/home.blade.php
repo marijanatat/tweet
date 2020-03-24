@@ -8,11 +8,10 @@
       <div class="flex-1 lg:mx-10" style="max-width:700px">
           @include('_panel')
           <div class="border border-grey-300 rounded-lg">
-              @include('_one_tweet')
-              @include('_one_tweet')
-              @include('_one_tweet')
-              @include('_one_tweet')
-              @include('_one_tweet')
+             @foreach ($tweets as $tweet)
+             @include('_one_tweet')
+             @endforeach
+             
 
 
           </div>
