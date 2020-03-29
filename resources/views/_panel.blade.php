@@ -10,6 +10,7 @@
                   <img src="https://i.pravatar.cc/40?u={{auth()->user()->email}}"
                     alt="your avatar"
                     class="rounded-full mr-2"
+                    width:="50"; heigh="50";
                     >
                     <button type="submit" 
                     class="bg-blue-500 rounded-lg shadow py-2 px-2 text-white">
