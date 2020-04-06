@@ -27,34 +27,9 @@
 
           <h1><img src="/png/j.png" alt="tweet">Tweet</h1> 
        </header>
-       <section>
+    </section>
 
-        <section class="px-8 py-4">      
-        <main class="container mx-auto">
-
-            <div class="lg:flex lg:justify-between"> 
-               @if(auth()->check())
-                    
-                
-      <div class="lg:w-32">
-          @include('_sidebar-links')
-          @endif
-   
-      </div>
-      <div class="flex-1 lg:mx-10" style="max-width:700px">
-          
-       @yield('content')
-      </div>
-      <div class="lg:w-1/6 bg-blue-100 rounded-lg p-4">
-        @if(auth()->check())
-                    
-     @include('_friends-list')
-
-@endif
-      </div>
-  </div>
-        </main>
-        <section>
+        {{$slot}}
     </div>
 </body>
 </html>

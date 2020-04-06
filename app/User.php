@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Tweet;
+use App\Followable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -38,10 +39,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function follows()
-    {
-        return $this->belongsToMany(User::class,'follows','user_id','following_user_id');
-    }
+   
 
     public function timeline()
     {
@@ -57,21 +55,20 @@ class User extends Authenticatable
 
     public function tweets()
     {
-       return $this->hasMany(Tweet::class);
+       return $this->hasMany(Tweet::class)->latest();
     }
     /*public function getAvatarAttribute()
     {
         return "https://i.pravatar.cc/40?u=" .$this->email; 
     }*/
 
-    public function follow(User $user)
-    {
-       return $this->follows()->save($user);
-    }
-
+    
+// u Laravel 6 ako ruta pretrazuje nesto sto nije primary key- na primer pretrazuje po imenu
+//Route::get('/profiles/{user}
     public function getRouteKeyName()
-    {
-        return  'name';
+   {
+       return  'name';
     }
+   //od Laravela 7 kada se deklarise wildcard {user:name}
 
 }
