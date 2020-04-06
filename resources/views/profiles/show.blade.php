@@ -23,10 +23,8 @@
 
 
      <div class="flex">
-        <!-- @if(auth()->user()->is($user))-- uradjeno policy sa metodom edit, uradjena autorizacija sa middlewearom na ruti
-            tako da je ovo nepotrbno moguce sa Can-->
-
-        @can('uedit', $user)
+        
+        @can('edit', $user)
             <a href="/profiles/{{$user->name}}/edit" 
             class="rounded-full border border-gray-300 py-2 px-4 mr-2 text-black text-xs">
              Edit profile
