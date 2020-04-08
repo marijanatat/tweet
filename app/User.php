@@ -17,9 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,7 +38,10 @@ class User extends Authenticatable
     ];
 
    
-
+  public function setPasswordAttribute($value)
+  {
+      $this->attributes['password']=bcrypt($value);
+  }
     public function timeline()
     {
     // return Tweet::where('user_id',$this->id)->latest()->get();
@@ -57,18 +58,30 @@ class User extends Authenticatable
     {
        return $this->hasMany(Tweet::class)->latest();
     }
-    /*public function getAvatarAttribute()
+    /*public function getAvatarAttribute($value)
     {
-        return "https://i.pravatar.cc/40?u=" .$this->email; 
+        return asset($value);
+        //return "https://i.pravatar.cc/40?u=" .$this->email; 
     }*/
 
     
 // u Laravel 6 ako ruta pretrazuje nesto sto nije primary key- na primer pretrazuje po imenu
 //Route::get('/profiles/{user}
-    public function getRouteKeyName()
-   {
-       return  'name';
-    }
+   // public function getRouteKeyName()
+   //{
+     //  return  'name';
+    //}
    //od Laravela 7 kada se deklarise wildcard {user:name}
 
+   public function path($append = '')
+    {
+        //$path = route('profile', $this->name);
+        $path = route('profile', $this->username);
+
+        return $append ? "{$path}/{$append}" : $path;
+    }
+
+
 }
+
+

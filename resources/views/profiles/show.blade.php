@@ -5,12 +5,18 @@
          style="width: 750px ;height:250px "  
          class="mb-2">
     
-         <img src="https://i.pravatar.cc/200?u={{$user->email}}" 
+
+         <img src="/storage/{{ $user->avatar}}"
+         class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" 
+         
+         style="left: 50%; width:140px;height:100px">
+<!--
+        <img src="https://i.pravatar.cc/200?u={{$user->email}}" 
             alt=""
             class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" 
             style="left: 50%"
          
-            >
+            >-->
     </div>
     
     <div class="flex justify-between items-center mb-6">
@@ -25,7 +31,7 @@
      <div class="flex">
         
         @can('edit', $user)
-            <a href="/profiles/{{$user->name}}/edit" 
+            <a href="/profiles/{{$user->username}}/edit" 
             class="rounded-full border border-gray-300 py-2 px-4 mr-2 text-black text-xs">
              Edit profile
               </a>
