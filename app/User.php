@@ -42,6 +42,7 @@ class User extends Authenticatable
   {
       $this->attributes['password']=bcrypt($value);
   }
+
     public function timeline()
     {
     // return Tweet::where('user_id',$this->id)->latest()->get();
@@ -49,10 +50,17 @@ class User extends Authenticatable
      
       return Tweet::whereIn('user_id',$friends)
       ->orWhere('user_id',$this->id)
-      ->latest()->get();
+      ->withLikes()
+      ->latest()->paginate(10);
 
 
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
 
     public function tweets()
     {
